@@ -8,6 +8,7 @@
     [cryogen-core.io :refer [path]]
     [cryogen-core.plugins :refer [load-plugins]]
     [cryogen-core.watcher :refer [start-watcher! start-watcher-for-changes!]]
+    [cryogen.core :refer [update-article]]
     [ring.server.standalone :as ring-server]
     [ring.util.codec :refer [url-decode]]
     [ring.util.response :refer [redirect file-response]])
@@ -21,7 +22,7 @@
 
 (def extra-config-dev
   "Add dev-time configuration overrides here, such as `:hide-future-posts? false`"
-  {})
+  {:update-article-fn update-article})
 
 
 (defn init
