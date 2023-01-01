@@ -1,6 +1,6 @@
 <div class="post-header">
   <div id="post-meta" class="row">
-    <strong>📆 Published: {{post.date|date:longDate}} / 📆 Last updated: {{post.update|date:longDate}}</strong>
+    <strong>📆 Published: {{post.date|date:"yyyy-MM-dd"}} / 📆 Last updated: {{post.update|date:"yyyy-MM-dd"}}</strong>
     {% if post.author %}
     <span class="col-lg-6 right">By: {{post.author}}</span>
     {% endif %}
