@@ -2,6 +2,8 @@
   (:require
     [cryogen-core.compiler :refer [compile-assets-timed]]
     [cryogen-core.plugins :refer [load-plugins]]
+    [cryogen.addon.file-path :as file-path]
+    [cryogen.addon.history :as history]
     [cryogen.addon.tag-count :as tag-count]
     [cryogen.addon.updated-at :as updated-at]))
 
@@ -9,7 +11,9 @@
 (defn update-article
   [article params]
   (-> article
-      (updated-at/update-article params)))
+      (file-path/update-article params)
+      (updated-at/update-article params)
+      (history/update-article params)))
 
 
 (defn extend-params
