@@ -51,6 +51,19 @@ t = map(lambda x: x + 1, s)
 print(list(t)) => [2, 3, 4, 5]
 ```
 
+- ELisp  
+`t`はtrueの意味で予約されている  
+`map`ではなく`mapcar`なのはなんで？  
+リスト返さない副作用だけのための`mapc`もある  
+`seq-map`というのもある  
+後から出てくる`seq-`族に合わせて再定義されているものと思われる
+
+```elisp
+(setq s '(1 2 3 4))
+(setq l (mapcar '1+ s))
+(print l) => (2, 3, 4, 5)
+```
+
 # filter
 `filter fn seq`  
 シーケンスの1つ1つに関数を適用した結果trueのものに絞ったシーケンスを返す  
@@ -94,6 +107,15 @@ public class Hello {
 s = [1, 2, 3, 4]
 t = filter(lambda x: x % 2 == 0, s)
 print(list(t)) => [2, 4]
+```
+
+- ELisp  
+`seq-filter`という名前になっている
+
+```elisp
+(setq s '(1 2 3 4))
+(setq l (seq-filter (lambda (x) (= (% x 2) 0)) s))
+(print l) => (2 4)
 ```
 
 # reduce
@@ -144,6 +166,16 @@ t = reduce(lambda a, b: a + b, s)
 print(t) => 10
 ```
 
+- ELisp  
+`seq-reduce`という名前になっている  
+initalValueが省略できない
+
+```elisp
+(setq s '(1 2 3 4))
+(setq l (seq-reduce '+ s 0))
+(print l) => 10
+```
+
 # find
 - Clojure  
 組込みでは用意されていないので`filter`と`first`の組み合わせ  
@@ -192,6 +224,15 @@ t = list(filter(lambda x: x == 1, s))[0]
 print(t) => 1
 ```
 
+- ELisp  
+`seq-find`という名前になっている
+
+```elisp
+(setq s '(1 2 3 4))
+(setq l (seq-find (lambda (x) (= x 1)) s))
+(print l)
+```
+
 # every
 - Clojure  
 ```clojure
@@ -238,6 +279,16 @@ print(t) => true
 s = [1, 2, 3, 4]
 t = all(0 < x for x in s)
 print(t) => true
+```
+
+- ELisp  
+`seq-every-p`という名前になっている  
+`-p`がついてるのはpredicate述語の略で、Clojureだと`?`を付ける
+
+```elisp
+((setq s '(1 2 3 4))
+(setq l (seq-every-p (lambda (x) (< 0 x)) s))
+(print l)
 ```
 
 # some
@@ -289,6 +340,17 @@ print(t) => true
 s = [1, 2, 3, 4]
 t = any(0 < x for x in s)
 print(t) => true
+```
+
+- ELisp  
+`seq-some`という名前になっている  
+`-p`がついていないのは、戻り値が条件の関数の戻り値に依存するため  
+詳しく言うとnon-nilな値が返ってきた時点で探索やめて値を返す
+
+```elisp
+(setq s '(1 2 3 4))
+(setq l  (seq-some (lambda (x) (< 1 x)) s))
+(print l) => t
 ```
 
 # あとがき
