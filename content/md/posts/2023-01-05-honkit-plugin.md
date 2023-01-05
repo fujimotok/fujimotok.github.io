@@ -129,46 +129,96 @@ markdown内でフォーマット変換を提供するシンボルを提供する
 /*
   test code
   
+  let home = '🏠'
+  let sep = '/'
   let path = ''
   let subdir = ''
   let success = false
   
   path = 'README.md'
   subdir = ''
-  const breadcrumbs = createBreadCrumbs(path, subdir)
-  let success = breadcrumbs === '<div><a href="/">🏠</a> /<div>'
+  const breadcrumbs = createBreadCrumbs(path, subdir, home, sep)
+  success = breadcrumbs === '<div><a href="/">🏠</a> /</div>'
 
   path = 'test.md'
   subdir = ''
-  const breadcrumbs = createBreadCrumbs(path, subdir)
-  let success = breadcrumbs === '<div><a href="/">🏠</a> /<div>'
+  const breadcrumbs = createBreadCrumbs(path, subdir, home, sep)
+  success = breadcrumbs === '<div><a href="/">🏠</a> /</div>'
 
   path = 'test/README.md'
   subdir = ''
-  const breadcrumbs = createBreadCrumbs(path, subdir)
-  success = breadcrumbs === '<div><a href="/">🏠</a> / <a href="/test/">test</a> /<div>'
+  const breadcrumbs = createBreadCrumbs(path, subdir, home, sep)
+  success = breadcrumbs === '<div><a href="/">🏠</a> / <a href="/test/">test</a> /</div>'
 
   path = 'test/test.md'
   subdir = ''
-  const breadcrumbs = createBreadCrumbs(path, subdir)
-  success = breadcrumbs === '<div><a href="/">🏠</a> / <a href="/test/">test</a> /<div>'
+  const breadcrumbs = createBreadCrumbs(path, subdir, home, sep)
+  success = breadcrumbs === '<div><a href="/">🏠</a> / <a href="/test/">test</a> /</div>'
+
+  path = 'README.md'
+  subdir = 'subdir'
+  const breadcrumbs = createBreadCrumbs(path, subdir, home, sep)
+  let success = breadcrumbs === '<div><a href="/subdir/">🏠</a> /</div>'
+
+  path = 'test.md'
+  subdir = 'subdir'
+  const breadcrumbs = createBreadCrumbs(path, subdir, home, sep)
+  success = breadcrumbs === '<div><a href="/subdir/">🏠</a> /</div>'
+
+  path = 'test/README.md'
+  subdir = 'subdir'
+  const breadcrumbs = createBreadCrumbs(path, subdir, home, sep)
+  success = breadcrumbs === '<div><a href="/subdir/">🏠</a> / <a href="/subdir/test/">test</a> /</div>'
+
+  path = 'test/test.md'
+  subdir = 'subdir'
+  const breadcrumbs = createBreadCrumbs(path, subdir, home, sep)
+  success = breadcrumbs === '<div><a href="/subdir/">🏠</a> / <a href="/subdir/test/">test</a> /</div>'
 */
 
-const createBreadCrumbs = (path, subdir) => {
-  let breadcrumbs = ''
+/*
+  path:   not starts with '/' and not ends with '/'
+  subdir: starts with '/' and ends with '/'
+  home:   home icon character
+  sep:    separator character
+ */
+const createBreadCrumbs = (path, subdir, home, sep) => {
+  let breadcrumbs = '<div>'
 
-  // TODO: implements
-
+  breadcrumbs += `<a href="${subdir}">${home}</a> ${sep}`
+  
+  const dirs = path.split('/').slice(0, -1)
+  let url = subdir
+  for (const dir of dirs) {
+    url += subdir + dir + '/'
+    breadcrumbs += ` <a href="${url}">${dir}</a> ${sep}`
+  }
+  
+  breadcrumbs += '</div>'
   return breadcrumbs
+}
+
+const normalizePath = (path) => {
+  return path.replace(/[\/]+/g, '/').replace(/^\//, '').replace(/\/$/, '')
+}
+
+const normalizeSubdir = (subdir) => {
+  const midpath = subdir.replace(/[\/]+/g, '/').replace(/^\//, '').replace(/\/$/, '')
+  return midpath === '' ? '/' : '/' + midpath + '/'
 }
 
 module.exports = {
   hooks: {
     'page': function(page) {
       const config = this.config.get('pluginsConfig.breadcrumbs', {})
-      const path = page.path
-      const subdir = config.subdir || ''
-      page.content =  createBreadCrumbs(path, subdir) + page.content;
+      
+      const path = normalizePath(page.path)
+      const subdir = normalizeSubdir(config.subdir || '')
+
+      const home = config.home || '🏠'
+      const sep = config.sep || '/'
+
+      page.content =  createBreadCrumbs(path, subdir, home, sep) + page.content;
       return page;
     }
   },
