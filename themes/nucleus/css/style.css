@@ -196,7 +196,7 @@ img.imgfull {
 }
 
 #right p {
-    margin: 0 0 20px 0;
+    margin: 8px 0 4px 0;
 }
 
 #right p:last-child {
@@ -283,5 +283,9 @@ img.imgfull {
         padding: 30px 20px;
     }
 
+}
+
+#disqus_thread {
+    margin-top: 20px;
 }
 
