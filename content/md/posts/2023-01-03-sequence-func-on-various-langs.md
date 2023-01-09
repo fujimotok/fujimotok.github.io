@@ -1,12 +1,12 @@
 {:title "いろんな言語でのシーケンス操作"
- :layout :post
  :tags  ["FP" "Clojure" "JavaScript" "C#" "Python"]
+ :layout :post
  :toc true}
 
-# 背景
+## 背景
 map, filter, reduce とか使いたいと思ったときに、言語ごとに違うので自分用にまとめたい
 
-# map
+## map
 `map fn seq`  
 シーケンスの1つ1つに関数を適用した結果のシーケンスを返す  
 例) `[1, 2, 3, 4] = inc => [2, 3, 4, 5]`
@@ -64,7 +64,7 @@ print(list(t)) => [2, 3, 4, 5]
 (print l) => (2, 3, 4, 5)
 ```
 
-# filter
+## filter
 `filter fn seq`  
 シーケンスの1つ1つに関数を適用した結果trueのものに絞ったシーケンスを返す  
 例) `[1, 2, 3, 4] = even => [2, 4]`
@@ -118,7 +118,7 @@ print(list(t)) => [2, 4]
 (print l) => (2 4)
 ```
 
-# reduce
+## reduce
 `reduce fn seq`  
 シーケンスを前から順番に取り出したものと、前回の結果を引数にとって関数を呼び、１つの結果を返す  
 例) `[1, 2, 3, 4] = + => 10`  
@@ -176,7 +176,7 @@ initalValueが省略できない
 (print l) => 10
 ```
 
-# find
+## find
 - Clojure  
 組込みでは用意されていないので`filter`と`first`の組み合わせ  
 マッチしなかったときは`nil`になる  
@@ -233,7 +233,7 @@ print(t) => 1
 (print l)
 ```
 
-# every
+## every
 - Clojure  
 ```clojure
 (def s [1 2 3 4])
@@ -291,7 +291,7 @@ print(t) => true
 (print l)
 ```
 
-# some
+## some
 - Clojure  
 `some`はちょっと特殊で、?がついてないので、trueでないときに`nil`が返ってくる  
 ちゃんとbool値で知りたかったら、`(boolean x)`をかませる必要がある
@@ -353,7 +353,7 @@ print(t) => true
 (print l) => t
 ```
 
-# あとがき
+## あとがき
 言語ごとに呼び方違ったりして検索がいつも戸惑う  
 なんだかんだJavaScriptの呼び名に慣れちゃってる感があるのでJavaScriptの呼び名に対応で書いた  
 

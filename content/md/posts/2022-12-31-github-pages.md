@@ -1,13 +1,13 @@
 {:title "GitHub Pages のユーザーサイトを GitHub Actions でデプロイした"
- :layout :post
  :tags  ["GitHub Pages"]
+ :layout :post
  :toc true}
 
-# ユーザーサイトとは
+## ユーザーサイトとは
 公開URLが`https://<ユーザー名>.github.io/`のものをユーザーサイトという  
 公開URLが`https://<ユーザー名>.github.io/<リポジトリ名>`のものはプロジェクトサイトという
 
-# ユーザーサイトとして公開するには
+## ユーザーサイトとして公開するには
 1. リポジトリ名を`<ユーザー名>.github.io`でリポジトリ作成
 2. アクションを作る
 
@@ -63,7 +63,7 @@ jobs:
         uses: actions/deploy-pages@v1
 ```
 
-# あとがき
+## あとがき
 ユーザーサイトの作り方は古いやり方（docsディレクトリを使う）しか書いて無くて、  
 GitHub Actions の例には、プロジェクトサイトの例しかないのでやり方がわからなかった。  
 ふたを開けたら大した手順なかった。

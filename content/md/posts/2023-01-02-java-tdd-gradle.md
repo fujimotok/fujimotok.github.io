@@ -1,22 +1,22 @@
 {:title "Java で TDD するために Gradle を設定した"
- :layout :post
  :tags  ["TDD" "Java" "Gradle"]
+ :layout :post
  :toc true}
 
-# 背景
+## 背景
 [Kent Beck テスト駆動開発](https://www.amazon.co.jp/%E3%83%86%E3%82%B9%E3%83%88%E9%A7%86%E5%8B%95%E9%96%8B%E7%99%BA-Kent-Beck/dp/4274217884)を読みながら、実際にTDDのコーディングやろうと思って、ユニットテスト環境を設定した
 
-# Gradle
+## Gradle
 Javaにおける`Makefile`にあたるシステム  
 `Makefile`→`Ant`→`Maven`→`Gradle`という順番で生まれている  
 `Ant`は`Eclipse`で見たことあるし、`Gradle`は`Android Studio`で見たことあったが、何の役割なのかは気にしてなかった  
 
-# インストール
+## インストール
 [Gradle公式](https://gradle.org/install/)からバイナリを落としてくるか  
 `Chocolatey`を使って`$ choco install gradle`でインストールする  
 `$ gradle --version`で動作確認
 
-# 手動でGradleを設定
+## 手動でGradleを設定
 `$ gradle init`で以下が生成される
 ```bash
 (project root)
@@ -48,14 +48,14 @@ Javaにおける`Makefile`にあたるシステム
 `project name`は`settings.gradle`の`rootProject.name`に従う  
 ドットがあれば逆順にディレクトリ階層作る
 
-# テストの準備
+## テストの準備
 [ここ](https://qiita.com/niwasawa/items/cfcd37a3c2a795c336ba#buildgradle)を参考に`build.gradle`を設定  
 `dependencies`に`testImplementation 'org.junit.jupiter:junit-jupiter:5.x.x'`を設定するのと、  
 `test`に`useJUnitPratform()`を追加するのがキモだと思われる
 
 JUnitには4系と5系の情報がネットにあるが、[Kent Beck テスト駆動開発](https://www.amazon.co.jp/%E3%83%86%E3%82%B9%E3%83%88%E9%A7%86%E5%8B%95%E9%96%8B%E7%99%BA-Kent-Beck/dp/4274217884)のコードは5系のようなのでJUnit5を使う
 
-# テストコード
+## テストコード
 [JUnit User Guide](https://junit.org/junit5/docs/current/user-guide/)から引用
 ```java
 import org.junit.jupiter.api.Test;
@@ -78,13 +78,13 @@ JUnit5で使う依存関係は、
   * [ ] `import org.junit.jupiter.api.Test;`が`@Test`を使えるようにしてくれて  
 `import static org.junit.jupiter.api.Assertions.assertEquals;`がアサーション関数
 
-# ビルドとテスト実行
+## ビルドとテスト実行
 `gradle build`でビルド実行
 
 `gradle test`でテスト実行（必要であればビルドもされる）
 
 
-# あとがき
+## あとがき
 とりあえずこれで、Emacsのshellから`$ gradle test`実行してユニットテスト実行できるようになったが、  
 保存時自動でテスト走らせたり、テストケースのレッドグリーンバーのEmacsフロントエンドが欲しい  
 一応[test-case-mode](https://github.com/TobiMarg/test-case-mode)というのがあってmelpaにも登録されているが、うまく動かない  

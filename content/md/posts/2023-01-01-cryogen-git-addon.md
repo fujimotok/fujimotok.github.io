@@ -1,16 +1,16 @@
 {:title "Cryogen でページの更新日を git からとってくる拡張を作った"
- :layout :post
  :tags  ["Cryogen" "Clojure"]
+ :layout :post
  :toc true}
 
-# 作った背景
+## 作った背景
 [前の投稿](https://fujimotok.github.io/posts/2022-12-28-cryogen-101/#機能拡張)で触れたとおり、Clojreで機能拡張を書ける
 
 Cryogenのデフォルトでは、ファイル名の先頭に付けた日付が記事の先頭に付く
 
 自分の使い方的に、wikiのようにどんどん更新したいので、更新日も一緒に付けるようにしたい
 
-# 実現手段
+## 実現手段
 `update-article-fn`をフックする  
 こいつの中で`article`に情報を追加して返すと  
 テンプレートの中で`{{NAME}}`として参照できる
@@ -22,7 +22,7 @@ Cryogenのデフォルトでは、ファイル名の先頭に付けた日付が�
 Clojureからgit情報にアクセスするのには[clj-jgit](https://github.com/clj-jgit/clj-jgit)を使った  
 シェルスクリプトがGitHub Actionsで動くかわからないし、自分のマシンがWindowsなので
 
-# コード
+## コード
 ```clojure
 (ns cryogen.core
   (:require
@@ -84,7 +84,7 @@ Clojureからgit情報にアクセスするのには[clj-jgit](https://github.co
   (System/exit 0))
 ```
 
-# あとがき
+## あとがき
 これ、拡張が増えてきたらどう管理するのがいいんだろうか？
 
 拡張毎にファイル分けて、エントリポイントだけ出して、`core.clj`がフック関数に羅列していくのがいいかな

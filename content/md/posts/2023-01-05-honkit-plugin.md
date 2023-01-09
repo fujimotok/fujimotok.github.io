@@ -1,21 +1,21 @@
 {:title "Honkit のプラグインを書いてみる"
- :layout :post
  :tags  ["Honkit" "Gitbook" "JavaScript"]
+ :layout :post
  :toc true}
 
-# Honkitとは
+## Honkitとは
 Gitbookと呼ばれていたものが、OSSの開発をやめて、  
 プロプライエタリなサービスに移行したため  
 forkしてメンテが続けられているのがHonkit  
 基本的にOSS時代のGitbookと互換している  
 
-# プラグイン
+## プラグイン
 npmで`gitbook-plugin-*`か`honkit-plugin-*`かで見つかるパッケージを  
 `npm instal`して、`book.json`の`plugins:[]`に足せばOK
 
 自分が欲しい機能として、パンくずリストをページトップに出すというのがあるが、見つからなかった
 
-# プラグインの作り方
+## プラグインの作り方
 [Honkit公式](https://honkit.netlify.app/plugins/create.html)に詳しい情報は書いてる
 
 自分がたどった手順を残しておく
@@ -103,11 +103,11 @@ module.exports = {
 };
 ```
 
-# フック、ブロック、フィルタとは
-## フック
+## フック、ブロック、フィルタとは
+### フック
 md→htmlに変換する前後とか様々なタイミングに割り込んで処理する
 
-## ブロック
+### ブロック
 markdonw内に独自のタグを用意して、md→htmlに変換するタイミングに関数で独自にhtmlを出してあげる
 ```md
 {% tag1 "argument 1", "argument 2", name="Test" %}
@@ -115,14 +115,14 @@ This is the body of the block.
 {% endtag1 %}
 ```
 
-## フィルタ
+### フィルタ
 markdown内でフォーマット変換を提供するシンボルを提供する
 ```md
 {{ "2022-10-10"|ISO8601 }} => 2022-10-10T00:00:00.000
 ```
 
 
-# パンくずリスト
+## パンくずリスト
 今回の要件は、hookの`page`のタイミングで、出来上がったhtmlの先頭にパンくずリストを表すhtmlを追加すれば良さそう
 
 ```js
@@ -225,7 +225,7 @@ module.exports = {
 };
 ```
 
-# プラグインのデバッグ
+## プラグインのデバッグ
 プラグイン側のルートディレクトリで`npm link`  
 Honkit側のルートディレクトリで`npm link <プラグインのパッケージ名>`  
 とやると、更新のたびに`npm install`しなくて済む  
