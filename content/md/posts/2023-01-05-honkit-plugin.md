@@ -3,26 +3,27 @@
  :layout :post
  :toc true}
 
+Honkitのプラグインの書き方を調べてまとめた。
+
 ## Honkitとは
 Gitbookと呼ばれていたものが、OSSの開発をやめて、  
-プロプライエタリなサービスに移行したため  
-forkしてメンテが続けられているのがHonkit  
-基本的にOSS時代のGitbookと互換している  
+プロプライエタリなサービスに移行したため、  
+forkしてメンテが続けられているのがHonkit。  
+基本的にOSS時代のGitbookと互換している。  
 
 ## プラグイン
-npmで`gitbook-plugin-*`か`honkit-plugin-*`かで見つかるパッケージを  
-`npm instal`して、`book.json`の`plugins:[]`に足せばOK
+npmで`gitbook-plugin-*`か`honkit-plugin-*`かで見つかるパッケージを、  
+`npm instal`して、`book.json`の`plugins:[]`に足せばOK。
 
-自分が欲しい機能として、パンくずリストをページトップに出すというのがあるが、見つからなかった
+自分が欲しい機能として、パンくずリストをページトップに出すというのがあるが、見つからなかった。
 
 ## プラグインの作り方
-[Honkit公式](https://honkit.netlify.app/plugins/create.html)に詳しい情報は書いてる
+[Honkit公式](https://honkit.netlify.app/plugins/create.html)に詳しい情報は書いてる。
 
-自分がたどった手順を残しておく
-
+自分がたどった手順を残しておく。
 1. 適当なディレクトリで`npm init`
 2. [Honkit公式 - Create and publish a plugin](https://honkit.netlify.app/plugins/create.html)に乗ってる`package.json`を真似る  
-`engines`と`honkit.properties`というのがHonkit用に必要なもの
+`engines`と`honkit.properties`というのがHonkit用に必要なもの。
 ```package.json
 {
     "name": "honkit-plugin-mytest",
@@ -42,7 +43,7 @@ npmで`gitbook-plugin-*`か`honkit-plugin-*`かで見つかるパッケージを
     }
 }
 ```
-ここにかいたプロパティが`book.json`から設定できるプロパティになる
+ここにかいたプロパティが`book.json`から設定できるプロパティになる。
 ```book.json
 {
   "plugins": [
@@ -68,7 +69,7 @@ module.exports = {
     filters: {}
 };
 ```
-4. フックを追加したければ、`index.js`の`hooks:{}`に[Honkit公式 - Hooks](https://honkit.netlify.app/plugins/hooks.html)に記載の名前と呼び出す関数を追加
+4. フックを追加したければ、`index.js`の`hooks:{}`に[Honkit公式 - Hooks](https://honkit.netlify.app/plugins/hooks.html)記載の名前と呼び出す関数を追加
 ```index.js
 module.exports = {
     hooks: {
@@ -80,7 +81,7 @@ module.exports = {
     }
 };
 ```
-5. ブロックを追加したければ、`index.js`の`blocks:{}`に[Honkit公式 - Extend Blocks](https://honkit.netlify.app/plugins/blocks.html)に記載の名前と呼び出す関数を追加
+5. ブロックを追加したければ、`index.js`の`blocks:{}`に[Honkit公式 - Extend Blocks](https://honkit.netlify.app/plugins/blocks.html)記載の名前と呼び出す関数を追加
 ```index.js
 module.exports = {
     blocks: {
@@ -92,7 +93,7 @@ module.exports = {
     }
 };
 ```
-6. フィルタを追加したければ、`index.js`の`filters:{}`に[Honkit公式 - Extend filters](https://honkit.netlify.app/plugins/Filters.html)に記載の名前と呼び出す関数を追加
+6. フィルタを追加したければ、`index.js`の`filters:{}`に[Honkit公式 - Extend filters](https://honkit.netlify.app/plugins/Filters.html)記載の名前と呼び出す関数を追加
 ```index.js
 module.exports = {
     filters: {
@@ -105,10 +106,10 @@ module.exports = {
 
 ## フック、ブロック、フィルタとは
 ### フック
-md→htmlに変換する前後とか様々なタイミングに割り込んで処理する
+md→htmlに変換する前後とか様々なタイミングに割り込んで処理する。
 
 ### ブロック
-markdonw内に独自のタグを用意して、md→htmlに変換するタイミングに関数で独自にhtmlを出してあげる
+markdonw内に独自のタグを用意して、md→htmlに変換するタイミングで関数によって独自にhtmlを出してあげる。
 ```md
 {% tag1 "argument 1", "argument 2", name="Test" %}
 This is the body of the block.
@@ -116,7 +117,7 @@ This is the body of the block.
 ```
 
 ### フィルタ
-markdown内でフォーマット変換を提供するシンボルを提供する
+markdown内でフォーマット変換を提供するシンボルを提供する。
 ```md
 {{ "2022-10-10"|ISO8601 }} => 2022-10-10T00:00:00.000
 ```
@@ -226,9 +227,9 @@ module.exports = {
 ```
 
 ## プラグインのデバッグ
-プラグイン側のルートディレクトリで`npm link`  
+プラグイン側のルートディレクトリで`npm link`。  
 Honkit側のルートディレクトリで`npm link <プラグインのパッケージ名>`  
-とやると、更新のたびに`npm install`しなくて済む  
+とやると、更新のたびに`npm install`しなくて済む。  
 
-初めて知った  
-これ、`npm link`したら、次の`npm link <プラグインのパッケージ名>`でリンクできるパッケージのリストに追加するって仕組みみたい
+初めて知った 。 
+これ、`npm link`したら、次の`npm link <プラグインのパッケージ名>`でリンクできるパッケージのリストに追加するって仕組みみたい。

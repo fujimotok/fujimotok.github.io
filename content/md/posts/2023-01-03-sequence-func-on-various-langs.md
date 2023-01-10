@@ -3,8 +3,10 @@
  :layout :post
  :toc true}
 
+Clojure・JavaScript・C#・Python・Elispでシーケンス操作の仕方を対比してまとめた。
+
 ## 背景
-map, filter, reduce とか使いたいと思ったときに、言語ごとに違うので自分用にまとめたい
+map, filter, reduceとか使いたいと思ったときに、言語ごとに違うので自分用にまとめたい。
 
 ## map
 `map fn seq`  
@@ -43,7 +45,7 @@ public class Hello {
 ```
 
 - Python  
-遅延シーケンスが返ってくるので`list()`で実体化が必要なのに注意
+遅延シーケンスが返ってくるので`list()`で実体化が必要なのに注意。
 
 ```python
 s = [1, 2, 3, 4]
@@ -51,12 +53,12 @@ t = map(lambda x: x + 1, s)
 print(list(t)) => [2, 3, 4, 5]
 ```
 
-- ELisp  
+- Elisp  
 `t`はtrueの意味で予約されている  
 `map`ではなく`mapcar`なのはなんで？  
 リスト返さない副作用だけのための`mapc`もある  
 `seq-map`というのもある  
-後から出てくる`seq-`族に合わせて再定義されているものと思われる
+後から出てくる`seq-`族に合わせて再定義されているものと思われる。
 
 ```elisp
 (setq s '(1 2 3 4))
@@ -66,7 +68,7 @@ print(list(t)) => [2, 3, 4, 5]
 
 ## filter
 `filter fn seq`  
-シーケンスの1つ1つに関数を適用した結果trueのものに絞ったシーケンスを返す  
+シーケンスの1つ1つに関数を適用した結果trueのものに絞ったシーケンスを返す。  
 例) `[1, 2, 3, 4] = even => [2, 4]`
 
 - Clojure  
@@ -101,7 +103,7 @@ public class Hello {
 ```
 
 - Python  
-遅延シーケンスが返ってくるので`list()`で実体化が必要なのに注意
+遅延シーケンスが返ってくるので`list()`で実体化が必要なのに注意。
 
 ```python
 s = [1, 2, 3, 4]
@@ -109,8 +111,8 @@ t = filter(lambda x: x % 2 == 0, s)
 print(list(t)) => [2, 4]
 ```
 
-- ELisp  
-`seq-filter`という名前になっている
+- Elisp  
+`seq-filter`という名前になっている。
 
 ```elisp
 (setq s '(1 2 3 4))
@@ -120,7 +122,7 @@ print(list(t)) => [2, 4]
 
 ## reduce
 `reduce fn seq`  
-シーケンスを前から順番に取り出したものと、前回の結果を引数にとって関数を呼び、１つの結果を返す  
+シーケンスを前から順番に取り出したものと、前回の結果を引数にとって関数を呼び、１つの結果を返す。  
 例) `[1, 2, 3, 4] = + => 10`  
 ![reduce.svg](img/reduce.png)
 
@@ -139,7 +141,7 @@ console.log(t) => 10
 ```
 
 - C#  
-`reduce`じゃなくて`Aggregate`
+`reduce`じゃなくて`Aggregate`。
 
 ```csharp
 using System;
@@ -156,7 +158,7 @@ public class Hello {
 ```
 
 - Python  
-`reduce`は別途インポートが必要
+`reduce`は別途インポートが必要。
 
 ```python
 from functools import reduce
@@ -166,9 +168,9 @@ t = reduce(lambda a, b: a + b, s)
 print(t) => 10
 ```
 
-- ELisp  
-`seq-reduce`という名前になっている  
-initalValueが省略できない
+- Elisp  
+`seq-reduce`という名前になっている。  
+initalValueが省略できない。
 
 ```elisp
 (setq s '(1 2 3 4))
@@ -178,9 +180,9 @@ initalValueが省略できない
 
 ## find
 - Clojure  
-組込みでは用意されていないので`filter`と`first`の組み合わせ  
-マッチしなかったときは`nil`になる  
-例外とかじゃないから後処理しやすい😁
+組込みでは用意されていないので`filter`と`first`の組み合わせ。  
+マッチしなかったときは`nil`になる。  
+例外とかじゃないから後処理しやすい😁。
 
 ```clojure
 (def s [1 2 3 4])
@@ -196,9 +198,9 @@ console.log(t) => 1
 ```
 
 - C#  
-`First`と`FirstOrDefault`がある  
-どちらも関数渡すと最初にマッチしたものを返す  
-`FirstOrDefault`はマッチしなかったときに例外にならず、その型のDefault値を返す
+`First`と`FirstOrDefault`がある。  
+どちらも関数渡すと最初にマッチしたものを返す。  
+`FirstOrDefault`はマッチしなかったとき例外にならず、その型のDefault値を返す。
 
 ```csharp
 using System;
@@ -215,8 +217,8 @@ public class Hello {
 ```
 
 - Python  
-組込みでは用意されていないので`filter`とインデックスアクセスする  
-ただし、マッチしなかったとき例外になるので、その辺のチェックが必要
+組込みでは用意されていないので`filter`とインデックスアクセスする。  
+ただし、マッチしなかったとき例外になるので、その辺のチェックが必要。
 
 ```python
 s = [1, 2, 3, 4]
@@ -224,8 +226,8 @@ t = list(filter(lambda x: x == 1, s))[0]
 print(t) => 1
 ```
 
-- ELisp  
-`seq-find`という名前になっている
+- Elisp  
+`seq-find`という名前になっている。
 
 ```elisp
 (setq s '(1 2 3 4))
@@ -249,7 +251,7 @@ console.log(t)
 ```
 
 - C#  
-`every`じゃなくて`All`
+`every`じゃなくて`All`。
 
 ```csharp
 using System;
@@ -266,7 +268,7 @@ public class Hello {
 ```
 
 - Python  
-関数は渡せないので事前にbooleanのシーケンスに変換が必要
+関数は渡せないので事前にbooleanのシーケンスに変換が必要。
 
 ```python
 s = [1, 2, 3, 4]
@@ -281,9 +283,9 @@ t = all(0 < x for x in s)
 print(t) => true
 ```
 
-- ELisp  
+- Elisp  
 `seq-every-p`という名前になっている  
-`-p`がついてるのはpredicate述語の略で、Clojureだと`?`を付ける
+`-p`がついてるのはpredicate述語の略で、Clojureだと`?`を付ける。
 
 ```elisp
 ((setq s '(1 2 3 4))
@@ -293,8 +295,8 @@ print(t) => true
 
 ## some
 - Clojure  
-`some`はちょっと特殊で、?がついてないので、trueでないときに`nil`が返ってくる  
-ちゃんとbool値で知りたかったら、`(boolean x)`をかませる必要がある
+`some`はちょっと特殊で、`?`がついてないので、trueでないときに`nil`が返ってくる。  
+ちゃんとbool値で知りたかったら、`(boolean x)`をかませる必要がある。
 
 ```clojure
 (def s [1 2 3 4])
@@ -327,7 +329,7 @@ public class Hello {
 ```
 
 - Python  
-関数は渡せないので事前にbooleanのシーケンスに変換が必要
+関数は渡せないので事前にbooleanのシーケンスに変換が必要。
 
 ```python
 s = [1, 2, 3, 4]
@@ -342,10 +344,10 @@ t = any(0 < x for x in s)
 print(t) => true
 ```
 
-- ELisp  
-`seq-some`という名前になっている  
-`-p`がついていないのは、戻り値が条件の関数の戻り値に依存するため  
-詳しく言うとnon-nilな値が返ってきた時点で探索やめて値を返す
+- Elisp  
+`seq-some`という名前になっている。  
+`-p`がついていないのは、戻り値が条件の関数の戻り値に依存するため。  
+詳しく言うとnon-nilな値が返ってきた時点で探索やめて値を返す。
 
 ```elisp
 (setq s '(1 2 3 4))
@@ -354,9 +356,9 @@ print(t) => true
 ```
 
 ## あとがき
-言語ごとに呼び方違ったりして検索がいつも戸惑う  
-なんだかんだJavaScriptの呼び名に慣れちゃってる感があるのでJavaScriptの呼び名に対応で書いた  
+言語ごとに呼び方違ったりして検索がいつも戸惑う。  
+なんだかんだJavaScriptの呼び名に慣れちゃってる感があるのでJavaScriptの呼び名に対応で書いた。  
 
-動作確認には[piza.io](https://paiza.io/ja)が便利だった  
+動作確認には[piza.io](https://paiza.io/ja)が便利だった。
 
-Clojureのシーケンス操作も迷うのでチートシート作りたい  
+Clojureのシーケンス操作も迷うのでチートシート作りたい。
