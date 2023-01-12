@@ -289,3 +289,9 @@ img.imgfull {
     margin-top: 20px;
 }
 
+.fab {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    font-size: 40px;
+}
