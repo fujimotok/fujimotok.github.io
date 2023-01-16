@@ -74,7 +74,7 @@ print(list(t)) => [2, 3, 4, 5]
 - Clojure  
 ```clojure
 (def s [1 2 3 4])
-(def t (map #(even? %) s))
+(def t (filter #(even? %) s))
 (println t) => (2, 4)
 ```
 
