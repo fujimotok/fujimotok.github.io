@@ -66,6 +66,31 @@
             <li><a title="RSS" href="{{rss-uri}}">RSS</a></li>
         </ul>
     </div>
+    <div class="calendar-wrap">
+      <h1>{{calendar.month}}</h1>
+      <table class="calendar">
+        <tr>
+          <th scope="col">SU</th>
+          <th scope="col">MO</th>
+          <th scope="col">TU</th>
+          <th scope="col">WE</th>
+          <th scope="col">TH</th>
+          <th scope="col">FR</th>
+          <th scope="col">SA</th>
+        </tr>
+        {% for i in calendar.items %}
+        <tr>
+          {% for j in i %}
+          {% if j.uri %}
+          <td><a href="{{j.uri}}">{{j.date}}</a></td>
+          {% else %}
+          <td>{{j.date}}</td>
+          {% endif %}
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
 </div>
 
 <div id="right" class="clearfix">

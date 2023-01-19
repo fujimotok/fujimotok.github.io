@@ -2,6 +2,7 @@
   (:require
     [cryogen-core.compiler :refer [compile-assets-timed]]
     [cryogen-core.plugins :refer [load-plugins]]
+    [cryogen.addon.calendar :as calendar]
     [cryogen.addon.file-path :as file-path]
     [cryogen.addon.history :as history]
     [cryogen.addon.tag-count :as tag-count]
@@ -19,7 +20,8 @@
 (defn extend-params
   [params site-data]
   (-> params
-      (tag-count/extend-params site-data)))
+      (tag-count/extend-params site-data)
+      (calendar/extend-params site-data)))
 
 
 (defn compile-site

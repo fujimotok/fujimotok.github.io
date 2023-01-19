@@ -295,3 +295,39 @@ img.imgfull {
     right: 40px;
     font-size: 40px;
 }
+
+
+.calendar-wrap {
+    margin: 20px 0;
+}
+
+.calendar-wrap h1 {
+    font-size: 15px !important;
+    text-align: center;
+    margin: 0px !important;
+}
+
+.calendar-wrap table {
+    table-layout: fixed;
+}
+
+.calendar th,td,tr {
+    color: #FFF;
+    background: transparent;
+    font-size: 12px !important;
+    text-align: center;
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.calendar a {
+    color: #FFF;
+    text-decoration:underline;
+}
+
+@media screen and (max-width: 480px) {
+    .calendar-wrap {
+        display: none;
+        margin: 0;
+    }
+}
