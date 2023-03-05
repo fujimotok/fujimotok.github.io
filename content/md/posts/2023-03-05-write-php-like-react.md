@@ -5,7 +5,7 @@
 
 素のPHPでReact風にコンポーネント単位で実装したいと考えて、方法を編み出してみた。
 
-## JavaScritpでふつうに書くと
+## JavaScriptでふつうに書くと
 List.js
 ```javascript: List.js
 import React from 'react'
