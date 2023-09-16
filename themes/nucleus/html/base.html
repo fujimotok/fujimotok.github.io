@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<!--[if lt IE 7 ]><html class="ie ie6" lang="en"><![endif]-->
-<!--[if IE 7 ]><html class="ie ie7" lang="en"><![endif]-->
-<!--[if IE 8 ]><html class="ie ie8" lang="en"><![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"><!--<![endif]-->
-<head>
+  <!--[if lt IE 7 ]><html class="ie ie6" lang="en"><![endif]-->
+  <!--[if IE 7 ]><html class="ie ie7" lang="en"><![endif]-->
+  <!--[if IE 8 ]><html class="ie ie8" lang="en"><![endif]-->
+  <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"><!--<![endif]-->
+  <head>
     <!-- Website Template designed by www.downloadwebsitetemplates.co.uk -->
     <!-- Modified to fit Cryogen.-->
     <meta charset="UTF-8">
@@ -28,85 +28,88 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/tomorrow-night-eighties.min.css">
     <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     <meta name="google-site-verification" content="wlY7i7CuvrtcPv2P9Xslil80Xb1SdlThSqNyAen83LY" />
-</head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2S9N73GPR0"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  </head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2S9N73GPR0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-  gtag('config', 'G-2S9N73GPR0');
-</script>
-<body>
+    gtag('config', 'G-2S9N73GPR0');
+  </script>
+  <script async src="https://cse.google.com/cse.js?cx=0120cc21e47d64c26">
+  </script>
+  <body>
 
-<div id="left">
-
-    <p id="logo">
+    <div id="left">
+      <div>
+        <p id="logo">
         <a title="{{title}}" href="{{index-uri}}">
-            <span class="text">{{title}}</span>
+          <span class="text">{{title}}</span>
         </a>
-    </p>
-
-    <div id="menucont" class="bodycontainer clearfix">
+      </p>
+      </div>
+      <div class="gcse-search"></div>
+      <div id="menucont" class="bodycontainer clearfix">
         <div class="menutitle">
-            <p><span class="fa fa-reorder"></span><strong>Menu</strong></p>
+          <p><span class="fa fa-reorder"></span><strong>Menu</strong></p>
         </div>
         <ul class="menu">
-            <li {% if home %} class="active" {% endif %}><a title="Home" href="{{index-uri}}">Home</a></li>
-            <li {% if archives %} class="active" {% endif %}><a title="Archives" href="{{archives-uri}}">Archives</a></li>
-            {% if tags|not-empty %}
-            <li {%ifequal uri tags-uri %} class="active" {% endifequal %}><a title="Tags" href="{{tags-uri}}">Tags</a></li>
-            {% endif %}
-            {% for nav-page in navbar-pages %}
-            <li {%ifequal page.uri nav-page.uri %} class="active" {% endifequal %}>
-                <a href="{{nav-page.uri}}">{{nav-page.title}}</a>
-            </li>
-            {% endfor %}
-            <li><a title="RSS" href="{{rss-uri}}">RSS</a></li>
-        </ul>
-    </div>
-    <div class="calendar-wrap">
-      <h1>{{calendar.month}}</h1>
-      <table class="calendar">
-        <tr>
-          <th scope="col">SU</th>
-          <th scope="col">MO</th>
-          <th scope="col">TU</th>
-          <th scope="col">WE</th>
-          <th scope="col">TH</th>
-          <th scope="col">FR</th>
-          <th scope="col">SA</th>
-        </tr>
-        {% for i in calendar.items %}
-        <tr>
-          {% for j in i %}
-          {% if j.uri %}
-          <td><a href="{{j.uri}}">{{j.date}}</a></td>
-          {% else %}
-          <td>{{j.date}}</td>
+          <li {% if home %} class="active" {% endif %}><a title="Home" href="{{index-uri}}">Home</a></li>
+          <li {% if archives %} class="active" {% endif %}><a title="Archives" href="{{archives-uri}}">Archives</a></li>
+          {% if tags|not-empty %}
+          <li {%ifequal uri tags-uri %} class="active" {% endifequal %}><a title="Tags" href="{{tags-uri}}">Tags</a></li>
           {% endif %}
+          {% for nav-page in navbar-pages %}
+          <li {%ifequal page.uri nav-page.uri %} class="active" {% endifequal %}>
+            <a href="{{nav-page.uri}}">{{nav-page.title}}</a>
+          </li>
           {% endfor %}
-        </tr>
-        {% endfor %}
-      </table>
+          <li><a title="RSS" href="{{rss-uri}}">RSS</a></li>
+        </ul>
+      </div>
+      <div class="calendar-wrap">
+        <h1>{{calendar.month}}</h1>
+        <table class="calendar">
+          <tr>
+            <th scope="col">SU</th>
+            <th scope="col">MO</th>
+            <th scope="col">TU</th>
+            <th scope="col">WE</th>
+            <th scope="col">TH</th>
+            <th scope="col">FR</th>
+            <th scope="col">SA</th>
+          </tr>
+          {% for i in calendar.items %}
+          <tr>
+            {% for j in i %}
+            {% if j.uri %}
+            <td><a href="{{j.uri}}">{{j.date}}</a></td>
+            {% else %}
+            <td>{{j.date}}</td>
+            {% endif %}
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
     </div>
-</div>
 
-<div id="right" class="clearfix">
-    {% block content %}
-    {% endblock %}
-<hr/>
-<div id="footercont" class="clearfix">Copyright &copy; {{today|date:yyyy}} {{author}}
-    <p>Powered by <a href="http://cryogenweb.org">Cryogen</a></p>
-</div>
-<a href="#right" class="fab"><i class="fas fa-regular fa-turn-up"></i></a>
-</div>
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-{% script "js/highlight.pack.js" %}
-<script>hljs.initHighlightingOnLoad();</script>
-{% script "js/scripts.js" %}
-{% if post.klipse %} {{post.klipse|safe}} {% endif %}
-{% if page.klipse %} {{page.klipse|safe}} {% endif %}
-</body>
+    <div id="right" class="clearfix">
+      {% block content %}
+      {% endblock %}
+      <hr/>
+      <div id="footercont" class="clearfix">Copyright &copy; {{today|date:yyyy}} {{author}}
+        <p>Powered by <a href="http://cryogenweb.org">Cryogen</a></p>
+      </div>
+      <a href="#right" class="fab"><i class="fas fa-regular fa-turn-up"></i></a>
+    </div>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    {% script "js/highlight.pack.js" %}
+    <script>hljs.initHighlightingOnLoad();</script>
+    {% script "js/scripts.js" %}
+    {% if post.klipse %} {{post.klipse|safe}} {% endif %}
+    {% if page.klipse %} {{page.klipse|safe}} {% endif %}
+  </body>
 </html>
