@@ -30,7 +30,7 @@ Emacs Lispで http requestを実装するときのあんちょこ
 
 (defun http-request (url &optional params method header body)
   (let ((url-request-method (or method "GET"))  ;; url-retrieve-* が勝手に参照する
-        (url-extensions-header (or header nil)) ;; url-retrieve-* が勝手に参照する
+        (url-request-extra-headers (or header nil)) ;; url-retrieve-* が勝手に参照する
         (url-request-data (or body nil))        ;; url-retrieve-* が勝手に参照する
         (request-url (url-query-param-concat url params))
         (response-string nil)
