@@ -34,9 +34,6 @@ WindowsのPS環境だとエラーが出る。
 - template: `clj/new`用のメタテンプレート
 - create: 公開されているテンプレートを元に作成。指定方法は`:template <template-name>`
 
-`-T:project/new`という組込みの機能もあるみたい。  
-`$ clojure -T:project/new :template app :name domain/appname :args '["+h2"]'`
-
 ### npm install <package-name>
 deps.ednに手動で追加。
 
