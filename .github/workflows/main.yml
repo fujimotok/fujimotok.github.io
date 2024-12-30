@@ -23,7 +23,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Setup Leiningen
-      uses: oxr463/setup-leiningen@0.0.1
+      run: |
+        curl -s https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein 2>/dev/null | perl -e 'chmod 0755, $_' && mv -f lein bin/lein
+        export PATH=$PATH:$(pwd)/bin
     - name: Install dependencies
       run: lein deps
     - name: Run build
