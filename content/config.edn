@@ -2,6 +2,7 @@
  :author                       "Fujimotok"
  :description                  "This blog is tech note."
  :site-url                     "https://fujimotok.github.io/"
+ :site-ogp                     "https://fujimotok.github.io/img/ogp.png"
  :post-root                    "posts"
  :page-root                    "pages"
  :post-root-uri                "posts"

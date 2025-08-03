@@ -1,4 +1,39 @@
 {% extends "/html/base.html" %}
+{%block subtitle %}: {{post.title}}{% endblock %}
+{% block meta %}
+<meta name="keywords" content="{% for tag in post.tags %}{{tag.name}}{% if not forloop.last %},{% endif %}{% endfor %}">
+{% if post.description %}
+<meta name="description" content="{{post.description}}">
+{% comment %} OpenGraph tags {% endcomment %}
+<meta property="og:description" content="{{post.description}}">
+{% comment %} TwitterCard tags {% endcomment %}
+<meta name="twitter:description" content="{{post.description}}" />
+{% endif %}
+<meta property="og:url" content="{{site-url}}{{uri}}" />
+<meta property="og:image" content="{{site-ogp}}" />
+<meta property="og:title" content="{{post.title}}" />
+<meta property="og:site_name" content="{{site-title}}" />
+<meta property="og:type" content="article" />
+<meta property="og:locale" content="ja_JP" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="{{site-title}}" />
+<meta name="twitter:title" content="{{post.title}}" />
+<meta name="twitter:image" content="{{site-ogp}}" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{post.title}}",
+  "image": "{{site-ogp}}",
+  "author": {
+    "@type": "Person",
+    "name": "{{author}}"
+  },
+  "datePublished": "{{post.date|date:"yyyy-MM-dd"}}",
+  "dateModified": "{{post.update|date:"yyyy-MM-dd"}}"
+}
+</script>
+{% endblock %}
 {% block content %}
 <div id="post">
     {% include "/html/post-content.html" %}
